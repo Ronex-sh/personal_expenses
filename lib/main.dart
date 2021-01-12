@@ -4,12 +4,6 @@ import 'package:personal_expenses/transaction.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  List<Transaction> transaction = [
-    Transaction(id: 1,title: 'new shose',amount: 4.5,date: DateTime.now()),
-    Transaction(id: 2,title: 'new shose2',amount: 4.5,date: DateTime.now()),
-
-
-  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,6 +14,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  List<Transaction> transactions = [
+    Transaction(id: 1, title: 'new shose', amount: 4.5, date: DateTime.now()),
+    Transaction(id: 2, title: 'new shose2', amount: 4.5, date: DateTime.now()),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +34,8 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Card(
-            child: Text('LIST OF TX'),
-          ),
+          Card(child: Text(transactions[0].title),)  // to display the transactions >> static
+       
         ],
       ),
     );
