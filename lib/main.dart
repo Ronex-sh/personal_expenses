@@ -21,23 +21,24 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Flutter App'),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.blue,
-              child: Text('CHART!'),
-              elevation: 5,
-            ),
-          ),
-          UserTransactions()
-        ],
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+      width: double.infinity,
+      child: Card(
+        color: Colors.blue,
+        child: Text('CHART!'),
+        elevation: 5,
       ),
+            ),
+            UserTransactions()
+          ],
+        ),
     );
   }
 }
