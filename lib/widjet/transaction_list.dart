@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_expenses/model/transaction.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
@@ -11,7 +12,15 @@ class TransactionList extends StatelessWidget {
     return Container(
       height: 200,
     
-      child:ListView.builder(
+      child:transactions.isEmpty?Column(
+        children: [
+          Text('no transactions added yet!',style:GoogleFonts.adamina(fontWeight: FontWeight.bold,),),
+          Container(
+            height: 150,
+            child: Image.asset('assets/image/waiting.png')
+            ),
+        ],
+      ):ListView.builder(
       itemBuilder: (_,index){
         return Card(
           child:    Row(
