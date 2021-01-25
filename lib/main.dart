@@ -38,6 +38,14 @@ class _MyHomePageState extends State<MyHomePage> {
     //   date: DateTime.now(),
     // ),
   ];
+  List<Transaction> get _recentTranscations {
+    return _userTransactions.where((element) {
+      return 
+      element.date.isAfter(
+        DateTime.now().subtract(Duration(days: 7))
+        );
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -57,9 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
       context: ctx,
       builder: (_) {
         return GestureDetector(
-         // onTap: () {},
+          // onTap: () {},
           child: NewTransaction(_addNewTransaction),
-         // behavior: HitTestBehavior.opaque,
+          // behavior: HitTestBehavior.opaque,
         );
       },
     );
@@ -83,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-         Chart(_userTransactions),
+            Chart(_recentTranscations),
             TransactionList(_userTransactions),
           ],
         ),
