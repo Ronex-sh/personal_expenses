@@ -11,7 +11,7 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     // Card(child: Text(transactions[0].title),)  // to display the transactions >> static
     return Container(
-      height: 200,
+     // height: MediaQuery.of(context).size.height*0.6,
       child: transactions.isEmpty
           ? Column(
               children: [

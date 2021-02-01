@@ -11,21 +11,23 @@ class ChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     print(spendingAmount);
     print(spendingPctOfTotal);
-    return Column(
+    return LayoutBuilder(builder: (context,constraint){
+      return 
+     Column(
       children: <Widget>[
         Container(
-          height: 20,
+          height: constraint.maxHeight*0.15,
           
           child: FittedBox(
             child: Text('\$${spendingAmount.toStringAsFixed(0)}'),
           ),
         ),
         SizedBox(
-          height: 4,
+          height: constraint.maxHeight*0.1,
         ),
         Container(
-          height: 60,
-          width: 20,
+          height: constraint.maxHeight*0.5,
+          width: constraint.maxHeight*0.1,
           child: Stack(
             children: <Widget>[
               Container(
@@ -48,10 +50,13 @@ class ChartBar extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 4,
+          height: constraint.maxHeight*0.1,
         ),
         Text(label),
       ],
     );
+    });
+    
+    
   }
 }
