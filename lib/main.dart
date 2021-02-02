@@ -104,6 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  bool _showShart = false;
+
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
@@ -123,17 +125,30 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Switch(
+                    value: _showShart,
+                    onChanged: (value) {
+                      setState(() {
+                        _showShart = value;
+                      });
+                    })
+              ],
+            ),
+            _showShart?
             Container(
                 height: (MediaQuery.of(context).size.height -
                         appBar.preferredSize.height -
                         MediaQuery.of(context).padding.top) *
-                    0.4,
-                child: Chart(_recentTranscations)),
+                    0.7,
+                child: Chart(_recentTranscations)):
             Container(
                 height: (MediaQuery.of(context).size.height -
                         appBar.preferredSize.height -
                         MediaQuery.of(context).padding.top) *
-                    0.6,
+                    0.5,
                 child: TransactionList(_userTransactions, deleteTransaction)),
           ],
         ),
