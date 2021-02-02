@@ -108,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final landscape =MediaQuery.of(context).orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text('Flutter App'),
       actions: <Widget>[
@@ -125,10 +126,12 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
+           if(landscape) Row(
+            
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Switch(
+                  
                     value: _showShart,
                     onChanged: (value) {
                       setState(() {
@@ -137,26 +140,48 @@ class _MyHomePageState extends State<MyHomePage> {
                     })
               ],
             ),
-            _showShart?
+            if(!landscape)
             Container(
-                height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top) *
-                    0.7,
-                child: Chart(_recentTranscations)):
-            Container(
-                height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top) *
-                    0.5,
-                child: TransactionList(_userTransactions, deleteTransaction)),
+                    height: (MediaQuery.of(context).size.height -
+                            appBar.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.4,
+                    child: Chart(_recentTranscations)),
+                
+              if(!landscape)
+               Container(
+                    height: (MediaQuery.of(context).size.height -
+                            appBar.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.6,
+                    child:
+                        TransactionList(_userTransactions, deleteTransaction)),
+              if(landscape)          
+            _showShart
+                ? Container(
+                    height: (MediaQuery.of(context).size.height -
+                            appBar.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.8,
+                    child: Chart(_recentTranscations))
+                : Container(
+                    height: (MediaQuery.of(context).size.height -
+                            appBar.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.3,
+                    child:
+                        TransactionList(_userTransactions, deleteTransaction)),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
+      floatingActionButton: Container(
+        height: 44,
+              child: FloatingActionButton(
+        
+          child: Icon(Icons.add),
+          onPressed: () => _startAddNewTransaction(context),
+        ),
       ),
     );
   }
