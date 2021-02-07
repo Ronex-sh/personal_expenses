@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
 import 'package:personal_expenses/widjet/chart.dart';
@@ -121,61 +123,63 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: appBar,
-      body: SingleChildScrollView(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-           if(landscape) Row(
-            
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Switch(
-                  
-                    value: _showShart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showShart = value;
-                      });
-                    })
-              ],
-            ),
-            if(!landscape)
-            Container(
-                    height: (MediaQuery.of(context).size.height -
-                            appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
-                        0.4,
-                    child: Chart(_recentTranscations)),
-                
+      body: SafeArea(
+              child: SingleChildScrollView(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+             if(landscape) Row(
+              
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Switch.adaptive(
+                    activeColor: Theme.of(context).accentColor,
+                      value: _showShart,
+                      onChanged: (value) {
+                        setState(() {
+                          _showShart = value;
+                        });
+                      })
+                ],
+              ),
               if(!landscape)
-               Container(
-                    height: (MediaQuery.of(context).size.height -
-                            appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
-                        0.6,
-                    child:
-                        TransactionList(_userTransactions, deleteTransaction)),
-              if(landscape)          
-            _showShart
-                ? Container(
-                    height: (MediaQuery.of(context).size.height -
-                            appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
-                        0.8,
-                    child: Chart(_recentTranscations))
-                : Container(
-                    height: (MediaQuery.of(context).size.height -
-                            appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
-                        0.3,
-                    child:
-                        TransactionList(_userTransactions, deleteTransaction)),
-          ],
+              Container(
+                      height: (MediaQuery.of(context).size.height -
+                              appBar.preferredSize.height -
+                              MediaQuery.of(context).padding.top) *
+                          0.4,
+                      child: Chart(_recentTranscations)),
+                  
+                if(!landscape)
+                 Container(
+                      height: (MediaQuery.of(context).size.height -
+                              appBar.preferredSize.height -
+                              MediaQuery.of(context).padding.top) *
+                          0.6,
+                      child:
+                          TransactionList(_userTransactions, deleteTransaction)),
+                if(landscape)          
+              _showShart
+                  ? Container(
+                      height: (MediaQuery.of(context).size.height -
+                              appBar.preferredSize.height -
+                              MediaQuery.of(context).padding.top) *
+                          0.8,
+                      child: Chart(_recentTranscations))
+                  : Container(
+                      height: (MediaQuery.of(context).size.height -
+                              appBar.preferredSize.height -
+                              MediaQuery.of(context).padding.top) *
+                          0.3,
+                      child:
+                          TransactionList(_userTransactions, deleteTransaction)),
+            ],
+          ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
+      floatingActionButtonLocation:  FloatingActionButtonLocation.centerFloat,
+      floatingActionButton:Platform.isIOS?Container(): Container(
         height: 44,
               child: FloatingActionButton(
         

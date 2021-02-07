@@ -23,7 +23,7 @@ class TransactionList extends StatelessWidget {
                     ),
                   ),
                   Container(
-                      height: constraint.maxHeight*0.5,
+                      height: constraint.maxHeight * 0.5,
                       child: Image.asset('assets/image/waiting.png')),
                 ],
               );
@@ -53,11 +53,18 @@ class TransactionList extends StatelessWidget {
                     subtitle: Text(
                       DateFormat.yMMMd().format(transactions[index].date),
                     ),
-                    trailing: IconButton(
-                        color: Theme.of(context).errorColor,
-                        icon: Icon(Icons.delete),
-                        onPressed: () =>
-                            deleteTrsnsaction(transactions[index].id)),
+                    trailing: MediaQuery.of(context).size.width > 480
+                        ? FlatButton.icon(
+                            label: Text('Delte'),
+                            icon: Icon(Icons.delete),
+                            textColor: Theme.of(context).errorColor,
+                            onPressed: () =>
+                                deleteTrsnsaction(transactions[index].id))
+                        : IconButton(
+                            color: Theme.of(context).errorColor,
+                            icon: Icon(Icons.delete),
+                            onPressed: () =>
+                                deleteTrsnsaction(transactions[index].id)),
                   ),
                 );
               },
